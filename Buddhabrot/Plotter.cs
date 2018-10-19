@@ -56,14 +56,15 @@ namespace Buddhabrot
 
 				int iteration = 0;
 
-				for(; iteration < 2000; iteration++)
+				for(; iteration < 15; iteration++)
 				{
 					if(z.real * z.real + z.imaginary * z.imaginary >= 4)
 					{
 						Iterate(c);
 						break;
 					}
-					z = z*z*z;
+					z = z.conjugate;
+					z = z * z;
 					z += c;
 				}
 				
@@ -74,12 +75,13 @@ namespace Buddhabrot
 		{
 			Complex z = c;
 			int iteration = 0;
-			while (z.real * z.real + z.imaginary * z.imaginary < 4 && iteration < 2000)
+			while (z.real * z.real + z.imaginary * z.imaginary < 4 && iteration < 15)
 			{
-				z = z * z * z;
-				z = z + c;
+				z = z.conjugate;
+				z = z * z;
+				z += c;
 
-				if(iteration > 4)
+				if (iteration > 4)
 					SavePoint(z);
 				iteration++;
 			}
