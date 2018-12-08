@@ -11,7 +11,7 @@ namespace Buddhabrot
     class Program
     {
         private static int width = 1920, height = 1080;
-		private static int redIters = 100000000, greenIters = 20000000, blueIters = 75000000;
+		private static int redIters = 100000, greenIters = 2000000, blueIters = 7500000;
         static void Main(string[] args)
         {
 			try
@@ -32,8 +32,6 @@ namespace Buddhabrot
 
 
 				Bitmap b = new Bitmap(width, height);
-
-				Console.WriteLine(Plotter.biggestHit);
 
 				for (int w = 0; w < width; w++)
 				{

@@ -12,6 +12,10 @@ namespace Buddhabrot
     class Plotter
     {
         public static int width = 1920, height = 1080;
+
+		public static int iterations = 1500;
+		public static int escapeRadius = 4;
+
         private int[] values;
 		public static int biggestHit = 0;
 
@@ -21,19 +25,19 @@ namespace Buddhabrot
 		public static Vector2 xRange = new Vector2(-2.5f, 1);
 		public static Vector2 yRange = new Vector2(-1, 1);
 
-		public int[] BeginPlot(int width, int height, int iterations)
+		public int[] BeginPlot(int width, int height, int pointCount)
         {
             Plotter.width = width;
             Plotter.height = height;
 
             values = new int[width * height];
 
-            PerformIterations(iterations);
+            PerformIterations(pointCount);
 
             return values;
         }
 
-        private void PerformIterations(int iters)
+        private void PerformIterations(int pointCount)
         {
 			Random r = new Random();
 
@@ -43,7 +47,7 @@ namespace Buddhabrot
 			Complex c = new Complex();
 			Complex z = new Complex();
 
-			for (int i = 0; i < iters; i++)
+			for (int i = 0; i < pointCount; i++)
 			{
 
 				float x = (float)r.NextDouble();
@@ -59,10 +63,11 @@ namespace Buddhabrot
 
 				int iteration = 0;
 
-				for(; iteration < 1500; iteration++)
+				for(; iteration < iterations; iteration++)
 				{
 					if(z.real * z.real + z.imaginary * z.imaginary >= 4)
 					{
+						//If the point escapes, reiterate it but save points to heatmap
 						Iterate(c);
 						break;
 					}
@@ -74,11 +79,12 @@ namespace Buddhabrot
 			}
 		}
 
+		//This function performs the MBrot loop but stores the points in a heatmap
 		private void Iterate(Complex c)
 		{
 			Complex z = c;
 			int iteration = 0;
-			while (z.real * z.real + z.imaginary * z.imaginary < 40 && iteration < 1500)
+			while (z.real * z.real + z.imaginary * z.imaginary < escapeRadius && iteration < iterations)
 			{
 				//z = z.conjugate;
 				z = z * z;
