@@ -11,7 +11,7 @@ namespace Buddhabrot
     class Program
     {
         private static int width = 1920, height = 1080;
-		private static int redIters = 100000, greenIters = 20000, blueIters = 7500;
+		private static int redIters = 100000000, greenIters = 20000000, blueIters = 75000000;
         static void Main(string[] args)
         {
 			try

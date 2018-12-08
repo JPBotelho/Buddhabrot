@@ -15,8 +15,11 @@ namespace Buddhabrot
         private int[] values;
 		public static int biggestHit = 0;
 
-		public static Vector2 xRange = new Vector2(-1.75f, 1.75f)*1.25f;
-		public static Vector2 yRange = new Vector2(-1, 1)*1.25f;
+		//public static Vector2 xRange = new Vector2(-1.75f, 1.75f)*1.25f;
+		//public static Vector2 yRange = new Vector2(-1, 1)*1.25f;
+
+		public static Vector2 xRange = new Vector2(-2.5f, 1);
+		public static Vector2 yRange = new Vector2(-1, 1);
 
 		public int[] BeginPlot(int width, int height, int iterations)
         {
@@ -56,14 +59,14 @@ namespace Buddhabrot
 
 				int iteration = 0;
 
-				for(; iteration < 15; iteration++)
+				for(; iteration < 1500; iteration++)
 				{
 					if(z.real * z.real + z.imaginary * z.imaginary >= 4)
 					{
 						Iterate(c);
 						break;
 					}
-					z = z.conjugate;
+					//z = z.conjugate;
 					z = z * z;
 					z += c;
 				}
@@ -75,9 +78,9 @@ namespace Buddhabrot
 		{
 			Complex z = c;
 			int iteration = 0;
-			while (z.real * z.real + z.imaginary * z.imaginary < 4 && iteration < 15)
+			while (z.real * z.real + z.imaginary * z.imaginary < 40 && iteration < 1500)
 			{
-				z = z.conjugate;
+				//z = z.conjugate;
 				z = z * z;
 				z += c;
 
